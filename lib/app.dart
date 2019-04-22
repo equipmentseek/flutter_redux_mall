@@ -3,8 +3,10 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter_redux_mall/constant/colors.dart';
 import 'package:flutter_redux_mall/page/demo/page.dart';
 import 'package:flutter_redux_mall/page/login/page.dart';
+import 'package:flutter_redux_mall/net/dio_util.dart';
 
 Widget createApp() {
+  doInit();
   final AbstractRoutes routes = HybridRoutes(routes: <AbstractRoutes>[
     PageRoutes(
       pages: <String, Page<Object, dynamic>>{
@@ -28,4 +30,8 @@ Widget createApp() {
       });
     },
   );
+}
+
+void doInit() {
+  DioUtil.init();
 }

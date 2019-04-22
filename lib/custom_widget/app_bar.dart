@@ -5,14 +5,14 @@ import 'package:flutter_redux_mall/r.dart';
 
 /// 自定义的TitleBar
 class TitleBar extends StatelessWidget implements PreferredSizeWidget {
-  final String _title;
+  final String title;
   final String subtitle;
   final String menuIconPath;
-  VoidCallback leadingOnPress;
+  final VoidCallback leadingOnPress;
   final VoidCallback subTitleOnPress;
 
-  TitleBar(
-    this._title, {
+  TitleBar({
+    @required this.title,
     this.subTitleOnPress,
     this.leadingOnPress,
     this.subtitle = '',
@@ -21,27 +21,36 @@ class TitleBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (leadingOnPress == null) {
-      leadingOnPress = () {
-        Navigator.pop(context);
-      };
-    }
     return DecoratedBox(
       child: SafeArea(
         child: SizedBox.fromSize(
-          size: Size.fromHeight(48.0),
-          child: Row(
+          size: Size.fromHeight(51),
+          child: Stack(
             children: <Widget>[
-              IconButton(
-                  icon: ImageIcon(AssetImage(R.imagesBackPng)),
-                  onPressed: leadingOnPress),
-              Expanded(
-                  child: Center(
-                      child: Text(
-                _title,
-                style: c333_16,
-              ))),
-              getSubTitle(),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: IconButton(
+                    icon: ImageIcon(AssetImage(R.imagesBackPng)),
+                    onPressed: () {
+                      if (leadingOnPress != null) {
+                        leadingOnPress();
+                      } else {
+                        Navigator.pop(context);
+                      }
+                    }),
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Center(
+                    child: Text(
+                  title,
+                  style: c333_16,
+                )),
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: getSubTitle(),
+              ),
             ],
           ),
         ),
@@ -63,13 +72,13 @@ class TitleBar extends StatelessWidget implements PreferredSizeWidget {
           onPressed: subTitleOnPress);
     } else {
       subWidget = GestureDetector(
-        child: Text(subtitle, style: c333_14),
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Text(subtitle, style: c333_14),
+        ),
         onTap: subTitleOnPress,
       );
     }
-    return Padding(
-      padding: EdgeInsets.all(15.0),
-      child: subWidget,
-    );
+    return subWidget;
   }
 }

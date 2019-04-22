@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux_mall/constant/colors.dart';
 import 'package:flutter_redux_mall/constant/text_styles.dart';
 import 'package:flutter_redux_mall/custom_widget/app_bar.dart';
+import 'package:flutter_redux_mall/custom_widget/title_page.dart';
 import 'package:flutter_redux_mall/r.dart';
 import 'package:flutter_redux_mall/util/input_formatter.dart';
 import 'state.dart';
@@ -14,100 +15,97 @@ TextEditingController _passwordController = TextEditingController();
 Widget buildView(LoginState state, Dispatch dispatch, ViewService viewService) {
   _phoneController.text = state.phone;
   _passwordController.text = state.password;
-  return Scaffold(
-    appBar: TitleBar(
-      '登录',
+  return TitlePageWidget(
+      title: '登录',
       subtitle: '注册',
-    ),
-    body: ListView(
-      padding: EdgeInsets.all(15.0),
-      children: <Widget>[
-        SizedBox.fromSize(
-          size: Size.fromHeight(15.0),
-        ),
-        Text(
-          '手机号码',
-          style: c333_14,
-        ),
-        TextField(
-          controller: _phoneController,
-          style: c333_14,
-          keyboardType: TextInputType.phone,
-          decoration: InputDecoration(
-            hintText: '请输入手机号码',
-            hintStyle: c999_14,
+      body: ListView(
+        padding: EdgeInsets.all(15.0),
+        children: <Widget>[
+          SizedBox.fromSize(
+            size: Size.fromHeight(15.0),
           ),
-          inputFormatters: [NumberTextInputFormatter.getInstance()],
-        ),
-        SizedBox.fromSize(
-          size: Size.fromHeight(15.0),
-        ),
-        Text(
-          '密码',
-          style: c333_14,
-        ),
-        TextField(
-          controller: _passwordController,
-          obscureText: true,
-          style: c333_14,
-          keyboardType: TextInputType.text,
-          decoration: InputDecoration(
-            hintText: '6-20位字母、数字或符号和密码',
-            hintStyle: c999_14,
+          Text(
+            '手机号码',
+            style: c333_14,
           ),
-        ),
-        SizedBox.fromSize(
-          size: Size.fromHeight(30.0),
-        ),
-        SizedBox.fromSize(
-          child: RaisedButton(
-            onPressed: () {
-              dispatch(LoginPageActionCreator.onLoginAction(
-                  _phoneController.text, _passwordController.text));
-            },
-            child: Text(
-              '登录',
-              style: white_14,
+          TextField(
+            controller: _phoneController,
+            style: c333_14,
+            keyboardType: TextInputType.phone,
+            decoration: InputDecoration(
+              hintText: '请输入手机号码',
+              hintStyle: c999_14,
             ),
-            color: colorPrimary,
+            inputFormatters: [NumberTextInputFormatter.getInstance()],
           ),
-          size: Size.fromHeight(50.0),
-        ),
-        Align(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8.0),
+          SizedBox.fromSize(
+            size: Size.fromHeight(15.0),
+          ),
+          Text(
+            '密码',
+            style: c333_14,
+          ),
+          TextField(
+            controller: _passwordController,
+            obscureText: true,
+            style: c333_14,
+            keyboardType: TextInputType.text,
+            decoration: InputDecoration(
+              hintText: '6-20位字母、数字或符号和密码',
+              hintStyle: c999_14,
+            ),
+          ),
+          SizedBox.fromSize(
+            size: Size.fromHeight(30.0),
+          ),
+          SizedBox.fromSize(
+            child: RaisedButton(
+              onPressed: () {
+                dispatch(LoginPageActionCreator.onLoginAction(
+                    _phoneController.text, _passwordController.text));
+              },
+              child: Text(
+                '登录',
+                style: white_14,
+              ),
+              color: colorPrimary,
+            ),
+            size: Size.fromHeight(50.0),
+          ),
+          Align(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8.0),
+              child: Text(
+                '忘记密码？',
+                style: c999_14,
+              ),
+            ),
+            alignment: Alignment.centerRight,
+          ),
+          SizedBox.fromSize(
+            size: Size.fromHeight(200.0),
+          ),
+          Align(
             child: Text(
-              '忘记密码？',
+              '第三方登录',
               style: c999_14,
             ),
           ),
-          alignment: Alignment.centerRight,
-        ),
-        SizedBox.fromSize(
-          size: Size.fromHeight(200.0),
-        ),
-        Align(
-          child: Text(
-            '第三方登录',
-            style: c999_14,
+          Row(
+            children: <Widget>[
+              buildThirdLoginWidget(0, () {
+                dispatch(LoginPageActionCreator.onThirdLogin(0));
+              }),
+              buildThirdLoginWidget(1, () {
+                dispatch(LoginPageActionCreator.onThirdLogin(1));
+              }),
+              buildThirdLoginWidget(2, () {
+                dispatch(LoginPageActionCreator.onThirdLogin(2));
+              }),
+            ],
           ),
-        ),
-        Row(
-          children: <Widget>[
-            buildThirdLoginWidget(0, () {
-              dispatch(LoginPageActionCreator.onThirdLogin(0));
-            }),
-            buildThirdLoginWidget(1, () {
-              dispatch(LoginPageActionCreator.onThirdLogin(1));
-            }),
-            buildThirdLoginWidget(2, () {
-              dispatch(LoginPageActionCreator.onThirdLogin(2));
-            }),
-          ],
-        ),
-      ],
-    ),
-  );
+        ],
+      ));
 }
 
 Widget buildThirdLoginWidget(int flag, GestureTapCallback onTap) {
