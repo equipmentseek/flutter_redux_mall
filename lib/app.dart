@@ -4,14 +4,16 @@ import 'package:flutter_redux_mall/constant/colors.dart';
 import 'package:flutter_redux_mall/page/demo/page.dart';
 import 'package:flutter_redux_mall/page/login/page.dart';
 import 'package:flutter_redux_mall/net/dio_util.dart';
+import 'package:flutter_redux_mall/page/main/page.dart';
 
 Widget createApp() {
   doInit();
   final AbstractRoutes routes = HybridRoutes(routes: <AbstractRoutes>[
     PageRoutes(
       pages: <String, Page<Object, dynamic>>{
-        'demo': DemoPage(),
-        'login': LoginPage(),
+        '/demo': DemoPage(),
+        '/login': LoginPage(),
+        '/main': MainPage(),
       },
     ),
   ]);
@@ -23,7 +25,7 @@ Widget createApp() {
       primarySwatch: mainMaterialColor,
     ),
     home: routes
-        .buildPage('login', {'phone': '13163751865', 'password': '123456'}),
+        .buildPage('/main', null),
     onGenerateRoute: (RouteSettings settings) {
       return MaterialPageRoute<Object>(builder: (BuildContext context) {
         return routes.buildPage(settings.name, settings.arguments);

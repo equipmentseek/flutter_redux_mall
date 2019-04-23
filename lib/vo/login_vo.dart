@@ -1,5 +1,3 @@
-import 'package:flutter_redux_mall/vo/base_data.dart';
-
 class LoginVo {
   String token;
   UserInfo userInfo;

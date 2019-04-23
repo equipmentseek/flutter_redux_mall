@@ -270,6 +270,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.3.3"
+  shared_preferences:
+    dependency: "direct main"
+    description:
+      name: shared_preferences
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.5.2"
   shelf:
     dependency: transitive
     description:

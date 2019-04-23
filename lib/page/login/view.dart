@@ -2,7 +2,6 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux_mall/constant/colors.dart';
 import 'package:flutter_redux_mall/constant/text_styles.dart';
-import 'package:flutter_redux_mall/custom_widget/app_bar.dart';
 import 'package:flutter_redux_mall/custom_widget/title_page.dart';
 import 'package:flutter_redux_mall/r.dart';
 import 'package:flutter_redux_mall/util/input_formatter.dart';
