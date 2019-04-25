@@ -22,7 +22,12 @@ Widget buildView(
   return Scaffold(
       body: IndexedStack(
         //使用IndexedStack为了切换的时候不重新加载已加载的页面
-        children: [],
+        children: [
+          viewService.buildComponent('home'),
+          viewService.buildComponent('category'),
+          viewService.buildComponent('cart'),
+          viewService.buildComponent('mine'),
+        ],
         index: state.tabIndex,
       ),
       bottomNavigationBar: new BottomNavigationBar(

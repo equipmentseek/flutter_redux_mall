@@ -15,5 +15,14 @@ class LoginState extends Cloneable<LoginState> {
 }
 
 LoginState initState(Map<String, String> param) {
-  return LoginState(phone: param['phone'], password: param['password']);
+  LoginState state = LoginState();
+  if(param != null){
+    if(param['phone'] != null){
+      state.phone = param['phone'];
+    }
+    if(param['password'] != null){
+      state.password = param['password'];
+    }
+  }
+  return state;
 }
